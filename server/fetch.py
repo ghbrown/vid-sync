@@ -41,19 +41,15 @@ def extract_urls(file_name):
     Returns:
     videos: a dictionary with ids as keys and urls as values.
     """ 
-    videos = {}
+    videos = []
     with open(file_name, 'r', encoding='utf-8') as file:
         json_data = json.load(file)
         
         # Assuming 'urls' is an array of objects with 'url' property
         if 'videos' in json_data and isinstance(json_data['videos'], list):
             for item in json_data['videos']:
-                if 'url' in item and 'id' in item:
-                    # Use id as the key and url as the value
-                    if check_url(item['url']):
-                        videos[item['id']] = item['url']
-                    else:
-                        print("Invalid video url: " + item['url'])
+                if 'url' in item:
+                    videos.append(item['url'])
                     
 
     return videos
