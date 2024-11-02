@@ -49,7 +49,10 @@ def extract_urls(file_name):
         if 'videos' in json_data and isinstance(json_data['videos'], list):
             for item in json_data['videos']:
                 if 'url' in item:
-                    videos.append(item['url'])
+                    if check_url(item['url']):
+                        videos.append(item['url'])
+                    else: 
+                        print("Invalid video url: " + item['url'])
                     
 
     return videos
