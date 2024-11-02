@@ -20,6 +20,9 @@
     <div class="video-inputs"></div>
     <button onclick="run()" class="run-button">Run</button>
 
-    <script src="{{url_for('static','js/main.js')}}"></script>
+    <!-- Result Display -->
+    <div id="result-display"></div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
