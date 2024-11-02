@@ -12,7 +12,7 @@ def run_cmd(cmd, args):
     str: The output from the command execution.
     """
     try:
-        # Run the command and capture its output
+        # Run a and capture its output
         result = subprocess.run([cmd] + args, capture_output=True, text=True, check=True)
         print("Command output:", result.stdout)
         return result.stdout
@@ -33,10 +33,10 @@ def get_audio(urls, quality=0):
     """
     command = 'yt-dlp'
 
-    # Build args as a list
-    args = ["-x", "--audio-format", "mp3", "--audio-quality", str(quality), "--postprocessor-args", "ffmpeg:-t 3600", "-o", "./downloads/audio/%(id)s.%(ext)s"]
+    # Build args as a list for subprocess.run()
+    args = ["-x", "--audio-format", "mp3", "--audio-quality", str(quality), "--postprocessor-args", "ffmpeg:-t 3600", "-o", "./downloads/%(id)s.%(ext)s"]
 
-    # Add URLs to the args list
+    # Add URLs to the end of the args list
     args.extend(urls)
 
     # Run yt-dlp with the list-formatted args
