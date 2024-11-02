@@ -41,3 +41,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial row
     addVideoInput();
 });
+
+function run() {
+  // read links
+  var links_html = document.getElementsByClassName("video-link");  // object collection
+  var links = new Array(links_html.length);  // proper urls
+
+  for (let i=0; i<links_html.length; i++) {
+    var cur_url = links_html[i].value;
+    links[i] = cur_url;
+  }
+
+  // remove empty links
+  var found_last_link = false;
+  while (!found_last_link && links.length>=1) {
+    if (links.at(-1) === "") {
+        links.pop();
+    } else {
+      found_last_link = true;
+    }
+  }
+
+  // serialize list of urls
+  var links_json = JSON.stringify(links);
+  fetch("https://jsonplaceholder.typicode.com/todos", {
+    method: "POST",
+    body: links_json,
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+}
