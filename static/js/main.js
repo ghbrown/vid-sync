@@ -64,13 +64,25 @@ function run() {
 
   // serialize list of urls
   var links_json = JSON.stringify(links);
-  fetch("https://jsonplaceholder.typicode.com/todos", {
+  fetch("/process_urls", {
     method: "POST",
     body: links_json,
     headers: {
       "Content-type": "application/json; charset=UTF-8"
     }
   })
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+  .then(response => response.json())
+  .then(data => {
+    // Display the result on the webpage
+    const resultDisplay = document.getElementById("result-display");
+    resultDisplay.innerText = `Result: ${data.message}`; // Display message from backend
+    // Optionally, show links if returned
+    if (data.links) {
+      resultDisplay.innerHTML += `<br>Links processed:<ul>${data.links.map(link => `<li>${link}</li>`).join('')}</ul>`;
+    }
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    document.getElementById("result-display").innerText = "An error occurred. Please try again.";
+  });
 }
