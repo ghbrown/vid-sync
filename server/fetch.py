@@ -1,6 +1,7 @@
 import requests
 import json
 import re
+from urllib.parse import urlparse, parse_qs
 
 def check_url(url):
     '''
@@ -39,7 +40,7 @@ def extract_urls(file_name):
     file_name: name of the .json file
 
     Returns:
-    videos: a dictionary with ids as keys and urls as values.
+    videos: a list of urls
     """ 
     videos = []
     with open(file_name, 'r', encoding='utf-8') as file:
@@ -53,6 +54,30 @@ def extract_urls(file_name):
                         videos.append(item['url'])
                     else: 
                         print("Invalid video url: " + item['url'])
-                    
-
+               
     return videos
+
+def get_id(url):
+    '''
+    Takes an url and returns a string that is the video ID.
+
+    Parameter:
+    url: a string that is the YouTube url.
+
+    Return:
+    id: a string that is the video ID.
+    '''
+    # Parse the URL
+    parsed_url = urlparse(url)
+    
+    # Check if it's a standard YouTube URL with "v" parameter in the query
+    if 'youtube.com' in parsed_url.netloc:
+        query_params = parse_qs(parsed_url.query)
+        if 'v' in query_params:
+            return query_params['v'][0]
+    # Check for youtu.be short URL format
+    elif 'youtu.be' in parsed_url.netloc:
+        return parsed_url.path.lstrip('/')
+    
+    # In case no video ID found
+    return None
