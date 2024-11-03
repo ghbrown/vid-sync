@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 addButton.textContent = videoLink; // Replace "Add" with the video link
                 input.style.display = 'none'; // Hide the input
                 addButton.disabled = true; // Disable the button
-                const removeButton = document.createElement('button');
-                removeButton.textContent = 'x';
+                const removeButton = document.createElement('img');
+                removeButton.src = '../static/assets/sword.png'; // Replace with the correct path
                 removeButton.className = 'remove-video-button';
                 removeButton.addEventListener('click', () => {
                     videoRow.remove(); 
