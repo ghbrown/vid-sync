@@ -2,6 +2,7 @@ import librosa
 import numpy as np
 import soundfile as sf
 from scipy.fft import fft, ifft, fftshift
+from scipy.signal import correlate, correlation_lags
     
 def save_merged_signal(signal_list, lags, fs, filename):
     shifted_signals = []
@@ -17,21 +18,30 @@ def save_merged_signal(signal_list, lags, fs, filename):
     
     sf.write(filename, combined_signal, fs)
 
-def compute_lag_pair(signal1, signal2, fs):
-    min_length = min(signal1.shape[0], signal2.shape[0])
-    F1 = fft(signal1)[:min_length]
-    F2 = fft(signal2)[:min_length]
+# def compute_lag_pair(signal1, signal2, fs):
+#     min_length = min(signal1.shape[0], signal2.shape[0])
+#     F1 = fft(signal1)[:min_length]
+#     F2 = fft(signal2)[:min_length]
 
-    cross_spectrum = F1 * np.conj(F2)
-    cross_spectrum /= np.abs(cross_spectrum)
-    inverse_fft = ifft(cross_spectrum)
-    shifted = fftshift(inverse_fft)
-    delay_idx = np.argmax(np.abs(shifted))
-    lag = delay_idx - min(len(signal1), min_length) // 2
+#     cross_spectrum = F1 * np.conj(F2)
+#     cross_spectrum /= np.abs(cross_spectrum)
+#     inverse_fft = ifft(cross_spectrum)
+#     shifted = fftshift(inverse_fft)
+#     delay_idx = np.argmax(np.abs(shifted))
+#     lag = delay_idx - min(len(signal1), min_length) // 2
+#     if lag > 0:
+#         return (lag/fs, 0)
+#     else:
+#         return (0, -1*lag/fs)
+    
+def compute_lag_pair(signal1, signal2, fs):
+    corr = correlate(signal1, signal2, mode='full')
+    lags = correlation_lags(signal1.shape[0], signal2.shape[0], mode="full")
+    lag = lags[np.argmax(corr)]
     if lag > 0:
-        return (lag/fs, 0)
+        return (0, lag/fs)
     else:
-        return (0, -1*lag/fs)
+        return (-1*lag/fs, 0)
     
 def compute_lags(signal_list, fs):
     N = len(signal_list)
@@ -51,8 +61,8 @@ def resolve_lags(filelist):
     signal_list = []
     for filename in filelist:
         signal, _ = librosa.load(filename, sr=fs, mono=True)
-        harmonic, percussive = librosa.effects.hpss(signal)
-        signal_list.append(percussive)
+        # harmonic, percussive = librosa.effects.hpss(signal)
+        signal_list.append(signal)
     lags = compute_lags(signal_list, fs)
     return lags
 
