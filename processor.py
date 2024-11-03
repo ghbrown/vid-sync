@@ -2,7 +2,7 @@ import librosa
 import numpy as np
 import soundfile as sf
 from scipy.fft import fft, ifft, fftshift
-
+    
 def save_merged_signal(signal_list, lags, fs, filename):
     shifted_signals = []
     for i in range(len(signal_list)):
@@ -59,10 +59,14 @@ def resolve_lags(filelist):
 if __name__ == "__main__":
     signal_name = ["MOCOCO.mp3", "FUWAWA.mp3"]
     fs = 8000
+    
     signal_list = []
     for filename in signal_name:
         signal, _ = librosa.load(filename, sr=fs, mono=True)
-        signal_list.append(signal)
+        harmonic, percussive = librosa.effects.hpss(signal)
+        # save_merged_signal([harmonic], [0], fs, filename.split('.')[0]+"_harmonic.mp3")
+        # save_merged_signal([percussive], [0], fs, filename.split('.')[0]+"_percussive.mp3")
+        signal_list.append(percussive)
 
     lags = resolve_lags(signal_name)
     for name, lag, in zip(signal_name, lags):
