@@ -15,8 +15,6 @@ def check_url(url):
     valid: a boolean that returns True if the url is valid.
     '''
 
-    print("Checking url validity...")
-
     response = requests.get(url)
     # Check if the status code is 200
     if response.status_code == 200:
@@ -125,9 +123,9 @@ def get_audio(urls, quality=0):
     # Run yt-dlp with the list-formatted args
     output = run_cmd(command, args)
     if output is not None:
-        print("Program ran successfully.")
+        print("Files downloaded successfully.")
     else:
-        print("Program encountered an error.")
+        print("Encountered an error while downloading.")
     return file_paths
 
 def generate_url(urls, timestamps):

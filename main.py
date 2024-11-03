@@ -2,9 +2,10 @@ import utils
 import processor
 
 def generate_playback(urls, keep=False):
-    error_msg = ""
+    # error_msg = ""
 
     # Filter out invalid urls
+    print("Checking url validity...")
     (filtered_urls, invalid_urls) = utils.filter_urls(urls)
 
     if not invalid_urls:
