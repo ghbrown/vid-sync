@@ -138,7 +138,7 @@ def generate_url(urls, timestamps):
     params = []
     for url, ts in zip(urls, timestamps):
         params.append(('v', get_id(url)))
-        params.append(('t', ts))
+        params.append(('t', str(round(ts, 2))))
 
     # Add the mode parameter last
     params.append(('mode', 'solo'))
