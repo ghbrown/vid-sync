@@ -1,3 +1,4 @@
+/* Contact Page Header */
 .page-header {
     color: rgb(255, 255, 255);
     text-align: center;
@@ -20,28 +21,29 @@
 
 .page-header nav ul {
     list-style: none;
-    padding: 0; /* Remove padding */
+    padding: 0;
 }
 
 .page-header nav ul li {
-    display: inline; 
-    margin: 0 15px; /* Space between items */
+    display: inline;
+    margin: 0 15px;
 }
 
 .page-header nav a {
-    color: rgb(243, 243, 243); /* Link color */
+    color: rgb(243, 243, 243);
     font-size: 1.2rem;
-    text-decoration: none; /* Remove underline */
-    padding: 10px 10px; /* Add padding for size */
-    background-color: rgba(44, 38, 35, 0.5); /* Semi-transparent background */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth transition */
+    text-decoration: none;
+    padding: 10px 10px;
+    background-color: rgba(44, 38, 35, 0.5);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .page-header nav a:hover {
-    background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
+/* Main Body Font */
 body {
     font-family: Arial, sans-serif;
 }
@@ -65,7 +67,7 @@ body {
     border-radius: 4px;
 }
 
-.add-video-button {
+.add-video-button, .run-button, .submit-button {
     cursor: pointer;
     background-color: #28a745;
     color: white;
@@ -73,23 +75,63 @@ body {
     border: none;
     border-radius: 4px;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-.add-video-button:hover{
+.add-video-button:hover, .run-button:hover, .submit-button:hover {
     background-color: #0e8b2c;
 }
 
-.add-video-button[disabled] {
+.add-video-button[disabled], .submit-button[disabled] {
     background-color: #ccc;
     cursor: not-allowed;
 }
 
-.run-button {
-    cursor: pointer;
-    background-color: #28a745;
-    color: white;
-    padding: 8px 16px;
-    border: none;
+/* Contact Form Styling */
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#contactForm label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#contactForm input[type="text"],
+#contactForm input[type="email"],
+#contactForm input[type="submit"],
+#contactForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+#contactForm textarea {
+    resize: vertical;
+}
+
+.submit-button {
+    margin-top: 15px;
+}
+
+#responseMessage {
+    display: none;
+    padding: 10px;
+    background-color: #e9f6ec;
+    border: 1px solid #d4e7d8;
+    border-radius: 4px;
+    color: #3a7a42;
+    font-size: 1rem;
+    text-align: center;
 }
