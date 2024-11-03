@@ -4,23 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
+    <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
     <title>Video-Sync</title>
 </head>
 <body>
     <header class="page-header">
+        <div class="header-strip top-strip"></div>
         <h1>Vid Sync</h1>
         <nav>
             <ul>
                 <li><a href="https://github.com/ghbrown/vid-sync">Github repo</a></li>
             </ul>
         </nav>
+        <div class="header-strip bottom-strip"></div>
     </header>
-    <div class="video-inputs"></div>
-    <button onclick="run()" class="run-button">Kick off sync</button>
+    <div class="main-content-wrapper">
+        <img src="../static/assets/dragon.png" alt="Left Animal" class="side-animal left-animal">
+        
+        <div class="main-content">
+            <div class="video-inputs"></div>
+            <button onclick="run()" class="run-button">Kick off sync</button>
+            <div id="result-display"></div>
+        </div>
+    
+        <img src="../static/assets/dragon.png" alt="Right Animal" class="side-animal right-animal">
+    </div>
 
-    <!-- Result Display -->
-    <div id="result-display"></div>
+    <script src="../static/js/main.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
