@@ -87,15 +87,13 @@ function run() {
         const resultDisplay = document.getElementById("result-display");
         const resultButton = document.getElementById("result-button");
         resultButton.addEventListener("click", () => {
-            window.open(data.url, '_blank');
+            window.open(data.link, '_blank');
         });
-        
-        resultDisplay.innerText = `${data.url}`; // Display message from backend
-        
+ 
         // Optionally, show links if returned
-        // if (data.url) {
-        //     // resultDisplay.innerHTML += `<br>Links processed:<ul>${data.url.map(link => `<li>${link}</li>`).join('')}</ul>`;
-        // }
+        if (data.url) {
+            resultDisplay.innerText = `${data.link}`; // Display message
+        }
         loading.classList.add("hidden");
         resultDisplay.classList.remove("hidden")
         resultButton.classList.remove("hidden")
