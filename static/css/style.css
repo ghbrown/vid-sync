@@ -123,6 +123,7 @@ body {
 }
 
 .video-link {
+    width: 100%;
     background-color: var(--kf-ivory);
     font-family: "Pixel";
     padding: 8px;
@@ -131,7 +132,8 @@ body {
     border-radius: 4px;
 }
 
-.add-video-button, .run-button, .go-button {
+.add-video-button, .run-button, .submit-button {
+    position: sticky;
     font-family: "Pixel";
     cursor: pointer;
     background-color: var(--kf-green);
@@ -144,7 +146,7 @@ body {
     
 }
 
-.add-video-button:hover, .run-button:hover, .go-button:hover {
+.add-video-button:hover, .run-button:hover, .submit-button:hover {
     background-color: #0e8b2c;
 }
 
@@ -170,17 +172,64 @@ body {
     margin-top: 15px;
 }
 
-#result-display {
-    display: none; /* Hidden by default */
-    position: inherit;
-    max-width: 300px;
-    background-color: var(--kf-ivory);
-    color: var(--kf-red);
+.result-display {
+    position: sticky;
+    margin-top: 10px;
+    background-color: aliceblue;
+}
+
+.result-button {
     font-family: "Pixel";
-    font-size: 1rem;
-    padding: 10px;
-    margin-top: 15px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
+    cursor: pointer;
+    background-color: var(--kf-green);
+    color: var(--kf-blue);
+    padding: 8px 16px;
+    border: none;
     border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.result-button[disabled] {
+    background-color: transparent;
+    cursor: default;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    width: 0px;
+    height: 0px;
+}
+
+.loading-img {
+    width: 100%;
+    height: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.contact-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.contact-container p {
+    margin: 10px 0;
+}
+
+.contact-container .email a {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.contact-container .email a:hover {
+    text-decoration: underline;
 }
