@@ -164,5 +164,8 @@ cython_debug/
 # test scripts
 test.py
 
+# cookies file
+cookies.txt
+
 # OS files
 .DS_Store
