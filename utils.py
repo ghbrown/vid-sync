@@ -18,7 +18,7 @@ def check_url(url):
 
     # Define a regex pattern for valid YouTube URLs
     youtube_regex = re.compile(
-        r'^(https?://)?(www\.)?(youtube\.com|youtu\.be)/(watch\?v=|embed/|v/|.+\?v=)?[a-zA-Z0-9_-]{11}$'
+        r'^(https?://)?(www\.)?(youtube\.com|youtu\.be)/(watch\?v=|embed/|v/|.+\?v=)?[a-zA-Z0-9_-]+'
     )
 
     if not bool(youtube_regex.match(url)):
