@@ -2,8 +2,8 @@ import librosa
 import numpy as np
 import soundfile as sf
 from scipy.fft import fft, ifft, fftshift
-from scipy.signal import correlate, correlation_lags
-    
+
+
 def save_merged_signal(signal_list, lags, fs, filename):
     shifted_signals = []
     for i in range(len(signal_list)):
@@ -53,15 +53,6 @@ def compute_lag_pair(signal1, signal2, fs):
     else:
         return (0, -1*lag/fs)
     
-def compute_lag_pair_cor(signal1, signal2, fs):
-    corr = correlate(signal1, signal2, mode='full')
-    lags = correlation_lags(signal1.shape[0], signal2.shape[0], mode="full")
-    lag = lags[np.argmax(corr)]
-    if lag > 0:
-        return (0, lag/fs)
-    else:
-        return (-1*lag/fs, 0)
-    
 def compute_lags(signal_list, fs):
     N = len(signal_list)
     lags = [0 for _ in range(N)]
@@ -75,19 +66,6 @@ def compute_lags(signal_list, fs):
     lags = [lag - m for lag in lags]
     return lags
 
-def compute_lags_cor(signal_list, fs):
-    N = len(signal_list)
-    lags = [0 for _ in range(N)]
-    for a, signal1 in enumerate(signal_list):
-        for b in range(a):
-            if a!= b:
-                lag_pair = compute_lag_pair_cor(signal1, signal_list[b], fs)
-                lags[a] += lag_pair[0]
-                lags[b] += lag_pair[1]
-    m = min(lags)
-    lags = [lag - m for lag in lags]
-    return lags
-
 def resolve_lags(filelist, fs):
     signal_list = []
     for filename in filelist:
@@ -95,18 +73,11 @@ def resolve_lags(filelist, fs):
         signal_list.append(signal)
     lags = compute_lags(signal_list, fs)
     return lags
-
-def resolve_lags_cor(filelist, fs):
-    signal_list = []
-    for filename in filelist:
-        signal, _ = librosa.load(filename, sr=fs, mono=True)
-        signal_list.append(signal)
-    lags = compute_lag_pair(signal_list, fs)
-    return lags
     
 if __name__ == "__main__":
     signal_name = ["7MtuoPeC4tE.mp3", "8B2Je1pZVpo.mp3", "ej85EfL1HYU.mp3", "HKZ0_UQvaOw.mp3"]
-    # signal_name = ["MOCOCO.mp3", "FUWAWA.mp3"]
+
+    signal_name = ["MOCOCO.mp3", "FUWAWA.mp3"]
     fs = 1000
     
     signal_list = []
@@ -114,10 +85,10 @@ if __name__ == "__main__":
         signal, _ = librosa.load(filename, sr=fs, mono=True)
         signal_list.append(signal)
 
-    lags = resolve_lags(signal_name, fs)
+    lags = resolve_lags(signal_name, fs, True)
     
     for name, lag in zip(signal_name, lags):
         print(name, lag)
-    # save_merged_signal(signal_list, lags, fs, "merged_signal.wav")
+    save_merged_signal(signal_list, lags, fs, "merged_signal.wav")
     
     
