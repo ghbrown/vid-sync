@@ -102,6 +102,7 @@ function run() {
     .catch(error => {
         console.error("Error:", error);
         document.getElementById("result-display").innerText = "An error occurred. Please try again.";
+        document.getElementById("result-display").classList.remove("hidden")
         loading.classList.add("hidden");
     });
 }
