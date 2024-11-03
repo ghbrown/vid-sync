@@ -94,7 +94,7 @@ function run() {
         // Optionally, show links if returned
         if (data.url) {
         resultDisplay.innerHTML = `ViewSync URL: ${data.url}`;
-        resultButton.disabled = false;
+        goButton.disabled = false;
         // Set up the button to navigate to the URL when clicked
         goButton.onclick = () => {
             window.open(data.url, '_blank'); // Opens in a new tab
