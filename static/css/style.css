@@ -87,6 +87,22 @@ body {
     cursor: not-allowed;
 }
 
+.remove-video-button {
+    margin-left: 10px;
+    background-color: #d9534f;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.remove-video-button:hover {
+    background-color: #c9302c;
+}
+
+
 .contact-container {
     max-width: 600px;
     margin: 20px auto;

@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 addButton.textContent = videoLink; // Replace "Add" with the video link
                 input.style.display = 'none'; // Hide the input
                 addButton.disabled = true; // Disable the button
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'x';
+                removeButton.className = 'remove-video-button';
+                removeButton.addEventListener('click', () => {
+                    videoRow.remove(); 
+                });
+                videoRow.appendChild(removeButton);
                 addVideoInput(); // Add new row for the next video input
             } else {
                 alert('Please enter a valid video link.');
