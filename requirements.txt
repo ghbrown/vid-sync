@@ -3,3 +3,4 @@ scipy
 librosa
 soundfile
 gunicorn
+yt-dlp
