@@ -156,6 +156,7 @@ body {
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis; 
+    color: var(--kf-blue);
     direction: rtl;
     text-align: left;
 }
@@ -195,7 +196,7 @@ body {
     font-family: "Pixel";
     cursor: pointer;
     background-color: var(--kf-green);
-    color: var(--kf-blue);
+    color: white;
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
