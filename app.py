@@ -11,7 +11,7 @@ def index():
 def process_data():
     urls = request.get_json() 
     video_sync_url = main.generate_playback(urls)
-    result = {"message": "test", "ViewSync URL": video_sync_url}
+    result = {"message": video_sync_url}
     return jsonify(result)
 
 if __name__ == '__main__':
