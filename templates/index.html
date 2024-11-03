@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
+    <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
     <title>Video-Sync</title>
 </head>
-<body>
+<body>https://www.youtube.com/watch?v=K7fkr0TrIvQ
     <header class="page-header">
         <div class="header-strip top-strip"></div>
         <h1>Vid Sync</h1>
@@ -24,12 +25,14 @@
         <div class="main-content">
             <div class="video-inputs"></div>
             <button onclick="run()" class="run-button">Kick off sync</button>
-            <div id="result-display"></div>
+            <div class="result-display" id="result-display"></div>
+            <a id="result-link"><button id="result-button" class="result-button" disabled></button></a>
+            <img class="loading-img hidden" id="loading-image" src="../static/assets/loading.gif"></img>
         </div>
     
         <img src="../static/assets/dragon.png" alt="Right Animal" class="side-animal right-animal">
     </div>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="../static/js/main.js"></script>
 </body>
 </html>
