@@ -83,44 +83,23 @@ function run() {
     })
     .then(response => response.json())
     .then(data => {
+        // Display the result on the webpage
         const resultDisplay = document.getElementById("result-display");
-        const loading = document.getElementById("loading"); // Ensure loading element exists
-        const goButton = document.createElement('button');
-        goButton.textContent = 'Go';
-        goButton.className = 'go-button';
+        const resultButton = document.getElementById("result-button");
+        resultButton.addEventListener("click", () => {
+          window.open(data.url, '_blank');
+        });
     
-        // Debugging: log data and elements
-        console.log("Data received:", data);
-        console.log("Result display element:", resultDisplay);
-        console.log("Loading element:", loading);
-    
-        // Check if data.url exists
+        
+        // Optionally, show links if returned
         if (data.url) {
-            console.log("URL found:", data.url);
-    
-            // Set result text
-            resultDisplay.innerHTML = `ViewSync URL: ${data.url}`;
-            
-            // Enable and set up the button to navigate to the URL
-            goButton.disabled = false;
-            goButton.onclick = () => {
-                window.open(data.url, '_blank'); // Opens in a new tab
-            };
-    
-            // Append the button after the text
-            resultDisplay.appendChild(document.createElement('br')); // Line break if needed
-            resultDisplay.appendChild(goButton);
-    
-            // Display the result section
-            resultDisplay.style.display = "block"; // Make sure it’s visible
-        } else {
-            console.log("No URL found in data");
+            resultDisplay.innerText = `${data.url}`; // Display message from backend
+            // resultDisplay.innerHTML += `<br>Links processed:<ul>${data.url.map(link => `<li>${link}</li>`).join('')}</ul>`;
         }
-    
-        // Hide loading indicator if it exists
-        if (loading) {
-            loading.classList.add("hidden");
-        }
+        loading.classList.add("hidden");
+        resultDisplay.classList.remove("hidden")
+        resultButton.classList.remove("hidden")
+        
     })
     .catch(error => {
         console.error("Error:", error);
