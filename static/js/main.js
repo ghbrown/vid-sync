@@ -87,9 +87,9 @@ function run() {
     // if (data.links && data.links.length > 0) {
     //   resultDisplay.innerHTML += `<br><a href="${data.links[0]}" target="_blank" class="go-button">Go</a>`;
     // }
-    if (data.link) {
+    // if (data.link) {
       resultDisplay.innerHTML += `<br><a href="${data.link}" target="${data.link}" class="go-button">Go</a>`;
-    }
+    // }
 
     resultDisplay.style.display = "block"; // Show the result display
   })
