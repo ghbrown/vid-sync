@@ -173,9 +173,13 @@ body {
 }
 
 .result-display {
-    position: sticky;
-    margin-top: 10px;
-    background-color: aliceblue;
+    width: 100%;
+    background-color: var(--kf-ivory);
+    font-family: "Pixel";
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .result-button {
@@ -188,16 +192,6 @@ body {
     border-radius: 4px;
     font-size: 16px;
     transition: background-color 0.3s ease;
-}
-
-.result-button[disabled] {
-    background-color: transparent;
-    cursor: default;
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    width: 0px;
-    height: 0px;
 }
 
 .loading-img {
