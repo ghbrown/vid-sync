@@ -1,4 +1,13 @@
 /* Contact Page Header */
+
+:root {
+  --kf-orange: #f9941a;
+  --kf-red: #cd2d0c;
+  --kf-blue: #6786fc;
+  --kf-ivory: #fbd291;
+  --kf-green: #7ccc2a;
+}
+
 .page-header {
     color: rgb(255, 255, 255);
     text-align: center;
