@@ -26,11 +26,10 @@ Here are a couple of sets of YouTube videos that can be synchronized by our appl
 - Popping Battle
     - [Greentek vs Dnoi | Top Status (Top 4 Popping)](https://www.youtube.com/watch?v=0DJROtE68FA)
     - [Dnoi Vs Greentek | Popping Battles | Freestyle Session 2017](https://www.youtube.com/watch?v=h-82WLvKZgs)
-
 - FWMC MINECRAFT JOURNEY (VTuber)
     - [【FWMC MINECRAFT JOURNEY】memories of minecraft are a bit fuzzy 🐾【MOCOCO POV】](https://www.youtube.com/watch?v=zkGA5X3tY_E)
     - [【FWMC MINECRAFT JOURNEY】memories of minecraft are always fluffy 🐾【FUWAWA POV】](https://www.youtube.com/watch?v=K7fkr0TrIvQ)
-- Hololive Overwatch 2 Collaboration
+- Hololive Overwatch 2 Collaboration(VTuber)
     - [【Overwatch 2】gugugaga](https://www.youtube.com/watch?v=HKZ0_UQvaOw)
     - [【OVERWATCH 2】Full Team Collab !!! with Ame, IRyS, Zeta, and Bijou !](https://www.youtube.com/watch?v=ej85EfL1HYU)
     - [【OVERWATCH 2】Full Team Collab !!! with Ame, IRyS, Zeta, and Bijou !](https://www.youtube.com/watch?v=7MtuoPeC4tE)
