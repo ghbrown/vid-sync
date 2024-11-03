@@ -2,6 +2,7 @@ import requests
 import subprocess
 import urllib
 import os
+import re
 # from urllib.parse import urlparse, parse_qs, urlencode
 
 def check_url(url):
@@ -15,22 +16,29 @@ def check_url(url):
     valid: a boolean that returns True if the url is valid.
     '''
 
+    # Define a regex pattern for valid YouTube URLs
+    youtube_regex = re.compile(
+        r'^(https?://)?(www\.)?(youtube\.com|youtu\.be)/(watch\?v=|embed/|v/|.+\?v=)?[a-zA-Z0-9_-]{11}$'
+    )
+
+    if not bool(youtube_regex.match(url)):
+        print("Given url is not a YouTube url.")
+        return False
+
     response = requests.get(url)
     # Check if the status code is 200
     if response.status_code == 200:
         print("The YouTube video is accessible.")
-        valid = True
+        return True
     elif response.status_code == 403:
         print("The video might be private or restricted.")
-        valid = False
+        return False
     elif response.status_code == 404:
         print("The video URL is invalid or the video has been removed.")
-        valid = False
+        return False
     else:
         print(f"Encountered an unexpected error. Status code: {response.status_code}")
-        valid = False
-    
-    return valid
+        return False
 
 def filter_urls(urls):
     """
