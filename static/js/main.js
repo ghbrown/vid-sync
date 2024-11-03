@@ -91,7 +91,7 @@ function run() {
         });
  
         // Optionally, show links if returned
-        if (data.url) {
+        if (data.message) {
             resultDisplay.innerText = `${data.message}`; // Display message
         }
         loading.classList.add("hidden");
