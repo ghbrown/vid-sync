@@ -9,7 +9,7 @@ def generate_playback(urls, keep=False):
     (filtered_urls, invalid_urls) = utils.filter_urls(urls)
 
     if not invalid_urls:
-        print "Some of the URLs are not valid. They have been removed from the list."
+        print("Some of the URLs are not valid. They have been removed from the list.")
 
     # Obtain downloaded file paths
     file_paths = utils.get_audio(filtered_urls)
