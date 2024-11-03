@@ -8,7 +8,7 @@ def generate_playback(urls, keep=False):
     print("Checking url validity...")
     (filtered_urls, invalid_urls) = utils.filter_urls(urls)
 
-    if not invalid_urls:
+    if invalid_urls:
         print("Some of the URLs are not valid. They have been removed from the list.")
         for bad_url in invalid_urls:
             print(bad_url)
