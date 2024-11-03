@@ -131,7 +131,7 @@ body {
     border-radius: 4px;
 }
 
-.add-video-button, .run-button, .submit-button {
+.add-video-button, .run-button, .go-button {
     font-family: "Pixel";
     cursor: pointer;
     background-color: var(--kf-green);
@@ -144,7 +144,7 @@ body {
     
 }
 
-.add-video-button:hover, .run-button:hover, .submit-button:hover {
+.add-video-button:hover, .run-button:hover, .go-button:hover {
     background-color: #0e8b2c;
 }
 
@@ -170,27 +170,17 @@ body {
     margin-top: 15px;
 }
 
-.contact-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 1.1em;
-}
-
-.contact-container p {
-    margin: 10px 0;
-}
-
-.contact-container .email a {
-    color: #007bff;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.contact-container .email a:hover {
-    text-decoration: underline;
+#result-display {
+    display: none; /* Hidden by default */
+    position: inherit;
+    max-width: 300px;
+    background-color: var(--kf-ivory);
+    color: var(--kf-red);
+    font-family: "Pixel";
+    font-size: 1rem;
+    padding: 10px;
+    margin-top: 15px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
