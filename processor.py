@@ -18,7 +18,6 @@ def save_merged_signal(signal_list, lags, fs, filename):
     
     sf.write(filename, combined_signal, fs)
     
-
 def quadratic_interpolation(cross_spectrum, peak_index):
     if peak_index <= 0 or peak_index >= len(cross_spectrum) - 1:
         return peak_index  # No interpolation possible at the boundaries
@@ -40,10 +39,9 @@ def compute_lag_pair(signal1, signal2, fs):
     padded_signal2 = np.array(signal2.tolist() + [0.0 for _ in range(N - signal2.shape[0])])
     F1 = fft(padded_signal1)
     F2 = fft(padded_signal2)
-
-    cross_spectrum = np.real(ifft(F1 * np.conj(F2)))
-    kernel = np.array([np.exp(-1*(i - N//2)**2) for i in range(cross_spectrum.shape[0])])
-    cross_spectrum *= kernel
+    
+    cross_spectrum = fftshift(np.real(ifft(F1 * np.conj(F2))))
+    # cross_spectrum *= np.array([np.exp(-0.0000001*(i - N//2)**2) for i in range(cross_spectrum.shape[0])])
     
     peak_index = np.argmax(cross_spectrum)
     refined_peak_index = quadratic_interpolation(cross_spectrum, peak_index)
@@ -120,6 +118,6 @@ if __name__ == "__main__":
     
     for name, lag in zip(signal_name, lags):
         print(name, lag)
-    save_merged_signal(signal_list, lags, fs, "merged_signal.wav")
+    # save_merged_signal(signal_list, lags, fs, "merged_signal.wav")
     
     
