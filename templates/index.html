@@ -11,28 +11,36 @@
 <body>
     <header class="page-header">
         <div class="header-strip top-strip"></div>
-        <!-- <h1>Vid Sync</h1> -->
-        <img src="{{url_for('static',filename='assets/vid-sync.png')}}" width=35% style="margin-top: 10px">
-        <nav>
-            <ul>
-                <li><a href="https://github.com/ghbrown/vid-sync">Github repo</a></li>
-            </ul>
-        </nav>
+        <div class="header-text" style="margin:auto">
+          <img src="{{url_for('static',filename='assets/vid-sync.png')}}" width=100% style="margin-top: 10px">
+          <a href="https://github.com/ghbrown/vid-sync">GITHUB REPO</a>
+        </div>
         <div class="header-strip bottom-strip"></div>
     </header>
     <div class="main-content-wrapper">
         <img src="../static/assets/dragon.png" alt="Left Animal" class="side-animal left-animal">
-        
+
         <div class="main-content">
             <div class="video-inputs"></div>
             <button onclick="run()" class="run-button">Kick off sync</button>
-            <div id="result-display" class="result-display hidden"></div>
-            <button id="result-button" class="result-button hidden" >Go</button>
-            <img class="loading-img hidden" id="loading-image" src="../static/assets/loading.gif"></img>
         </div>
-    
+
         <img src="../static/assets/dragon.png" alt="Right Animal" class="side-animal right-animal">
     </div>
+
+    <div class="main-content-wrapper" style="padding:5px">
+      <div class="main-content" style="padding:5px">
+        <img class="loading-img hidden" id="loading-image" src="../static/assets/loading.gif"></img>
+        <div id="result-display" class="result-display hidden"></div>
+        <button id="result-button" class="result-button hidden" >Go</button>
+        <p style="text-align:center;color:white;font-family:'Pixel'">
+          © 2024 TEAM O
+          <br>
+          © 2024 HACKTX
+        </p>
+      </div>
+    </div>
+
 
     <script src="../static/js/main.js"></script>
 
