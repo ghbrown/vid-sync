@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 removeButton.addEventListener('click', () => {
                     videoRow.remove(); 
                 });
-                videoRow.appendChild(removeButton);
+                videoRow.insertBefore(removeButton, addButton);
                 addVideoInput(); // Add new row for the next video input
             } else {
                 alert('Please enter a valid video link.');
