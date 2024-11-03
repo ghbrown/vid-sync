@@ -9,7 +9,7 @@ def index():
 
 @app.route('/process_urls', methods=['POST'])
 def process_data():
-    urls = request.get_json() 
+    urls = request.get_json()
     video_sync_url = main.generate_playback(urls)
     result = {"message": video_sync_url}
     return jsonify(result)
