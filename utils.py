@@ -113,7 +113,7 @@ def get_audio(urls, quality=0):
     command = 'yt-dlp'
 
     # Build args as a list for subprocess.run()
-    args = ["-f","bestaudio[ext=m4a]/bestaudio", "--extract-audio", "--audio-format", "m4a", "--postprocessor-args", "ffmpeg:-t 3600", "-o", "./downloads/%(id)s.%(ext)s"]
+    args = ["--cookies", "cookies.txt", "-f","bestaudio[ext=m4a]/bestaudio", "--extract-audio", "--audio-format", "m4a", "--postprocessor-args", "ffmpeg:-t 3600", "-o", "./downloads/%(id)s.%(ext)s"]
 
     # Add URLs to the end of the args list
     args.extend(urls)
