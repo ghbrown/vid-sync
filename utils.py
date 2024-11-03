@@ -1,8 +1,7 @@
 import requests
-import json
 import subprocess
-
-from urllib.parse import urlparse, parse_qs
+import urllib
+# from urllib.parse import urlparse, parse_qs, urlencode
 
 def check_url(url):
     '''
@@ -33,30 +32,25 @@ def check_url(url):
 
 
 
-def extract_urls(file_name):
+def filter_urls(urls):
     """
-    Extracts information of videos from a .json file.
+    Filters out urls that cannot be accessed.
 
     Parameters: 
-    file_name: name of the .json file
-
+    urls: a list of unfiltered urls
+    
     Returns:
-    videos: a list of urls
+    videos: a list of filtered urls
     """ 
-    videos = []
-    with open(file_name, 'r', encoding='utf-8') as file:
-        json_data = json.load(file)
-        
-        # Assuming 'urls' is an array of objects with 'url' property
-        if 'videos' in json_data and isinstance(json_data['videos'], list):
-            for item in json_data['videos']:
-                if 'url' in item:
-                    if check_url(item['url']):
-                        videos.append(item['url'])
-                    else: 
-                        print("Invalid video url: " + item['url'])
+    filtered_urls = []
+    invalid_urls = []
+    for url in urls:
+        if check_url(url):
+            filtered_urls.append(url)
+        else:
+            invalid_urls.append(url)
                
-    return videos
+    return filtered_urls, invalid_urls
 
 def get_id(url):
     '''
@@ -69,11 +63,11 @@ def get_id(url):
     id: a string that is the video ID.
     '''
     # Parse the URL
-    parsed_url = urlparse(url)
+    parsed_url = urllib.parse.urlparse(url)
     
     # Check if it's a standard YouTube URL with "v" parameter in the query
     if 'youtube.com' in parsed_url.netloc:
-        query_params = parse_qs(parsed_url.query)
+        query_params = urllib.parse.parse_qs(parsed_url.query)
         if 'v' in query_params:
             return query_params['v'][0]
     # Check for youtu.be short URL format
@@ -124,13 +118,32 @@ def get_audio(urls, quality=0):
     # Add URLs to the end of the args list
     args.extend(urls)
 
+    file_paths = []
+    for url in urls:
+        file_paths.append("./downloads/" + get_id(url) + ".mp3")
+
     # Run yt-dlp with the list-formatted args
     output = run_cmd(command, args)
     if output is not None:
         print("Program ran successfully.")
     else:
         print("Program encountered an error.")
-    return output
+    return file_paths
 
-    
+def generate_url(urls, timestamps):
+    if len(urls) != len(timestamps):
+        raise ValueError("The number of ids must match the number of timestamps.")
+
+    # Base parameters for each video ID and timestamp
+    params = []
+    for url, ts in zip(urls, timestamps):
+        params.append(('v', get_id(url)))
+        params.append(('t', ts))
+
+    # Add the mode parameter last
+    params.append(('mode', 'solo'))
+
+    # Construct the URL
+    base_url = "http://viewsync.net/watch"
+    return f"{base_url}?{urllib.parse.urlencode(params)}"
 
