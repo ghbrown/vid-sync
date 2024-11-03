@@ -16,12 +16,6 @@
 .page-header {
     color: rgb(255, 255, 255);
     text-align: center;
-    background-color: blue;
-    background-image: url("../assets/header_bg.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    padding: 5px 0;
 }
 
 .page-header h1 {
@@ -60,7 +54,11 @@
 
 /* Main Body Font */
 body {
+    background-image: url('../assets/background.png');
     font-family: Arial, sans-serif;
+    background-repeat: no-repeat;
+    background-color: black;
+    background-size: cover;
 }
 
 /* Styling for the video input section */
@@ -85,12 +83,13 @@ body {
 .add-video-button, .run-button, .submit-button {
     cursor: pointer;
     background-color: #28a745;
-    color: white;
+    color: #7575bb;
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    
 }
 .run-button{
     position: relative;
@@ -102,19 +101,18 @@ body {
 }
 
 .add-video-button[disabled], .submit-button[disabled] {
-    background-color: #ccc;
+    background-color: transparent;
     cursor: not-allowed;
+    max-width: 50%; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
 .remove-video-button {
     margin-right: 10px;
-    background-color: #d9534f;
-    color: white;
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
+    width: 60px; 
+    height: 30px; 
 }
 
 .remove-video-button:hover {
