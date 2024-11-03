@@ -182,6 +182,10 @@ body {
     margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    /* Ensure text wraps within the box */
+    word-wrap: break-word; /* For long words */
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .result-button {
@@ -199,6 +203,7 @@ body {
 .loading-img {
     width: 100%;
     height: auto;
+    margin-top: 10px;
 }
 
 .hidden {
