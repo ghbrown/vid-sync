@@ -18,15 +18,16 @@ def save_merged_signal(signal_list, lags, fs, filename):
     sf.write(filename, combined_signal, fs)
 
 def compute_lag_pair(signal1, signal2, fs):
-    F1 = fft(signal1)
-    F2 = fft(signal2)
+    min_length = min(signal1.shape[0], signal2.shape[0])
+    F1 = fft(signal1)[:min_length]
+    F2 = fft(signal2)[:min_length]
 
     cross_spectrum = F1 * np.conj(F2)
     cross_spectrum /= np.abs(cross_spectrum)
     inverse_fft = ifft(cross_spectrum)
     shifted = fftshift(inverse_fft)
     delay_idx = np.argmax(np.abs(shifted))
-    lag = delay_idx - len(signal1) // 2
+    lag = delay_idx - min(len(signal1), min_length) // 2
     if lag > 0:
         return (lag/fs, 0)
     else:
