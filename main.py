@@ -1,7 +1,7 @@
 import utils
 import processor
 
-def generate_playback(urls):
+def generate_playback(urls, keep=False):
     error_msg = ""
 
     # Filter out invalid urls
@@ -10,17 +10,17 @@ def generate_playback(urls):
     if not invalid_urls:
         error_msg += "Some of the URLs are not valid. They have been removed from the list."
 
+    # Obtain downloaded file paths
     file_paths = utils.get_audio(filtered_urls)
 
-    timestapms = processor.resolve_lags(file_paths)
+    # Obtain timestamps
+    timestamps = processor.resolve_lags(file_paths)
 
-    viewsync_url = utils.generate_url(urls, timestapms)
+    # Generate url compatible with ViewSync website
+    viewsync_url = utils.generate_url(urls, timestamps)
 
-    utils.clean_up(file_paths)
-
-
-    
-
-
+    # Clean up files if not keeping
+    if not keep:
+        utils.clean_up(file_paths)
 
     return viewsync_url

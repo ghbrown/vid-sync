@@ -14,6 +14,9 @@ def check_url(url):
     Returns:
     valid: a boolean that returns True if the url is valid.
     '''
+
+    print("Checking url validity...")
+
     response = requests.get(url)
     # Check if the status code is 200
     if response.status_code == 200:
@@ -30,8 +33,6 @@ def check_url(url):
         valid = False
     
     return valid
-
-
 
 def filter_urls(urls):
     """
@@ -78,8 +79,6 @@ def get_id(url):
     # In case no video ID found
     return None
 
-
-
 def run_cmd(cmd, args):
     """
     Runs a command-line program with the specified arguments.
@@ -114,14 +113,14 @@ def get_audio(urls, quality=0):
     command = 'yt-dlp'
 
     # Build args as a list for subprocess.run()
-    args = ["-x", "--audio-format", "mp3", "--audio-quality", str(quality), "--postprocessor-args", "ffmpeg:-t 3600", "-o", "./downloads/%(id)s.%(ext)s"]
+    args = ["-f","bestaudio[ext=m4a]/bestaudio", "--extract-audio", "--audio-format", "m4a", "--postprocessor-args", "ffmpeg:-t 3600", "-o", "./downloads/%(id)s.%(ext)s"]
 
     # Add URLs to the end of the args list
     args.extend(urls)
 
     file_paths = []
     for url in urls:
-        file_paths.append("./downloads/" + get_id(url) + ".mp3")
+        file_paths.append("./downloads/" + get_id(url) + ".m4a")
 
     # Run yt-dlp with the list-formatted args
     output = run_cmd(command, args)
