@@ -1,6 +1,7 @@
 import requests
 import subprocess
 import urllib
+import os
 # from urllib.parse import urlparse, parse_qs, urlencode
 
 def check_url(url):
@@ -147,3 +148,11 @@ def generate_url(urls, timestamps):
     base_url = "http://viewsync.net/watch"
     return f"{base_url}?{urllib.parse.urlencode(params)}"
 
+def clean_up(file_paths):
+    # Loop through the list and remove each file
+    for file_path in file_paths:
+        try:
+            os.remove(file_path)
+            print(f"Removed: {file_path}")
+        except Exception as e:
+            print(f"Error removing {file_path}: {e}")

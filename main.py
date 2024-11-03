@@ -16,6 +16,8 @@ def generate_playback(urls):
 
     viewsync_url = utils.generate_url(urls, timestapms)
 
+    utils.clean_up(file_paths)
+
 
     
 
