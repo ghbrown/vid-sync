@@ -137,7 +137,7 @@ body {
     font-family: "Pixel";
     cursor: pointer;
     background-color: var(--kf-green);
-    color: var(--kf-blue);
+    color: white;
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
