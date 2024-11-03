@@ -50,56 +50,68 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function run() {
-  const loading = document.getElementById('loading-image');
-  loading.classList.remove("hidden");
-  
-  // read links
-  var links_html = document.getElementsByClassName("video-link");  // object collection
-  var links = new Array(links_html.length);  // proper urls
+    const loading = document.getElementById('loading-image');
+    loading.classList.remove("hidden");
+    
+    // read links
+    var links_html = document.getElementsByClassName("video-link");  // object collection
+    var links = new Array(links_html.length);  // proper urls
 
-  for (let i=0; i<links_html.length; i++) {
-    var cur_url = links_html[i].value;
-    links[i] = cur_url;
-  }
-
-  // remove empty links
-  var found_last_link = false;
-  while (!found_last_link && links.length>=1) {
-    if (links.at(-1) === "") {
-        links.pop();
-    } else {
-      found_last_link = true;
+    for (let i=0; i<links_html.length; i++) {
+        var cur_url = links_html[i].value;
+        links[i] = cur_url;
     }
-  }
 
-  // serialize list of urls
-  var links_json = JSON.stringify(links);
-  fetch("/process_urls", {
-    method: "POST",
-    body: links_json,
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
+    // remove empty links
+    var found_last_link = false;
+    while (!found_last_link && links.length>=1) {
+        if (links.at(-1) === "") {
+            links.pop();
+        } else {
+        found_last_link = true;
+        }
     }
-  })
-  .then(response => response.json())
-  .then(data => {
-    // Display the result on the webpage
-    const resultDisplay = document.getElementById("result-display");
-    const resultButton = document.getElementById("result-button");
-    const resultLink = document.getElementById("result-link");
 
-    resultDisplay.innerText = `Result: ${data.message}`; // Display message from backend
-    // Optionally, show links if returned
-    if (data.links) {
-      resultButton.disabled = false;
-      resultLink.href = `${data.message}`;
-      resultDisplay.innerHTML += `<br>Links processed:<ul>${data.links.map(link => `<li>${link}</li>`).join('')}</ul>`;
-    }
-    loading.classList.add("hidden");
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    document.getElementById("result-display").innerText = "An error occurred. Please try again.";
-    loading.classList.add("hidden");
-  });
+    // serialize list of urls
+    var links_json = JSON.stringify(links);
+    fetch("/process_urls", {
+        method: "POST",
+        body: links_json,
+        headers: {
+        "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Display the result on the webpage
+        const resultDisplay = document.getElementById("result-display");
+        const goButton = document.createElement('button');
+        goButton.textContent = 'Go';
+        goButton.className = 'go-button';
+
+        const resultLink = document.getElementById("result-link");
+        
+        // Optionally, show links if returned
+        if (data.url) {
+        resultDisplay.innerHTML = `ViewSync URL: ${data.url}`;
+        resultButton.disabled = false;
+        // Set up the button to navigate to the URL when clicked
+        goButton.onclick = () => {
+            window.open(data.url, '_blank'); // Opens in a new tab
+        };
+
+        // Append the button after the text
+        resultDisplay.appendChild(document.createElement('br')); // Line break if needed
+        resultDisplay.appendChild(goButton);
+
+        resultDisplay.style.display = "block"; // Show the result display
+        // resultDisplay.innerHTML += `<br>Links processed:<ul>${data.links.map(link => `<li>${link}</li>`).join('')}</ul>`;
+        }
+        loading.classList.add("hidden");
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("result-display").innerText = "An error occurred. Please try again.";
+        loading.classList.add("hidden");
+    });
 }
