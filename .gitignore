@@ -163,3 +163,6 @@ cython_debug/
 
 # test scripts
 test.py
+
+# OS files
+.DS_Store
