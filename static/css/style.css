@@ -77,6 +77,10 @@ body {
     font-size: 16px;
     transition: background-color 0.3s ease;
 }
+.run-button{
+    position: relative;
+    left: 50%;
+}
 
 .add-video-button:hover, .run-button:hover, .submit-button:hover {
     background-color: #0e8b2c;
