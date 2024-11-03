@@ -50,26 +50,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function run() {
-  // Read links
+  const loading = document.getElementById('loading-image');
+  loading.classList.remove("hidden");
+  
+  // read links
   var links_html = document.getElementsByClassName("video-link");  // object collection
   var links = new Array(links_html.length);  // proper urls
 
-  for (let i = 0; i < links_html.length; i++) {
+  for (let i=0; i<links_html.length; i++) {
     var cur_url = links_html[i].value;
     links[i] = cur_url;
   }
 
-  // Remove empty links
+  // remove empty links
   var found_last_link = false;
-  while (!found_last_link && links.length >= 1) {
+  while (!found_last_link && links.length>=1) {
     if (links.at(-1) === "") {
-      links.pop();
+        links.pop();
     } else {
       found_last_link = true;
     }
   }
 
-  // Serialize list of URLs
+  // serialize list of urls
   var links_json = JSON.stringify(links);
   fetch("/process_urls", {
     method: "POST",
@@ -80,27 +83,23 @@ function run() {
   })
   .then(response => response.json())
   .then(data => {
+    // Display the result on the webpage
     const resultDisplay = document.getElementById("result-display");
+    const resultButton = document.getElementById("result-button");
+    const resultLink = document.getElementById("result-link");
 
-    // Set the result message and add the "Go" button if links are returned
-    // resultDisplay.innerHTML = `Result: ${data.message}`;
-    // if (data.links && data.links.length > 0) {
-    //   resultDisplay.innerHTML += `<br><a href="${data.links[0]}" target="_blank" class="go-button">Go</a>`;
-    // }
-    // if (data.link) {
-      resultDisplay.innerHTML += `<br><a href="${data.link}" target="${data.link}" class="go-button">Go</a>`;
-    // }
-
-    resultDisplay.style.display = "block"; // Show the result display
+    resultDisplay.innerText = `Result: ${data.message}`; // Display message from backend
+    // Optionally, show links if returned
+    if (data.links) {
+      resultButton.disabled = false;
+      resultLink.href = `${data.message}`;
+      resultDisplay.innerHTML += `<br>Links processed:<ul>${data.links.map(link => `<li>${link}</li>`).join('')}</ul>`;
+    }
+    loading.classList.add("hidden");
   })
   .catch(error => {
     console.error("Error:", error);
-    const resultDisplay = document.getElementById("result-display");
-
-    // Display the error message
-    resultDisplay.innerText = "An error occurred. Please try again.";
-    resultDisplay.style.display = "block";
+    document.getElementById("result-display").innerText = "An error occurred. Please try again.";
+    loading.classList.add("hidden");
   });
 }
-
-
