@@ -83,10 +83,9 @@ if __name__ == "__main__":
     signal_list = []
     for filename in signal_name:
         signal, _ = librosa.load(filename, sr=fs, mono=True)
-        harmonic, percussive = librosa.effects.hpss(signal)
         signal_list.append(signal)
 
-    lags = resolve_lags(signal_name)
+    lags = resolve_lags(signal_name, fs)
     for name, lag, in zip(signal_name, lags):
         print(name, lag)
     save_merged_signal(signal_list, lags, fs, "merged_signal.wav")
