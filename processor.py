@@ -51,8 +51,8 @@ def resolve_lags(filelist):
     signal_list = []
     for filename in filelist:
         signal, _ = librosa.load(filename, sr=fs, mono=True)
-        signal_list.append(signal)
-
+        harmonic, percussive = librosa.effects.hpss(signal)
+        signal_list.append(percussive)
     lags = compute_lags(signal_list, fs)
     return lags
 
