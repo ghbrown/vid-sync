@@ -129,6 +129,7 @@ body {
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    text-align: center;
 }
 
 .add-video-button, .run-button, .submit-button {
@@ -155,6 +156,8 @@ body {
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis; 
+    direction: rtl;
+    text-align: left;
 }
 
 .remove-video-button {
