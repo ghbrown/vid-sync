@@ -14,7 +14,7 @@ def generate_playback(urls, keep=False):
     file_paths = utils.get_audio(filtered_urls)
 
     # Obtain timestamps
-    timestamps = processor.resolve_lags(file_paths)
+    timestamps = processor.resolve_lags(file_paths,1000)
 
     # Generate url compatible with ViewSync website
     viewsync_url = utils.generate_url(urls, timestamps)

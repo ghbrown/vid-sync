@@ -10,9 +10,9 @@ def index():
 @app.route('/process_urls', methods=['POST'])
 def process_data():
     urls = request.get_json()
-    video_sync_url = main.generate_playback(urls)
+    video_sync_url = main.generate_playback(urls,keep=True)
     result = {"message": video_sync_url}
     return jsonify(result)
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
