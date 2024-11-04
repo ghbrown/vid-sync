@@ -3,7 +3,10 @@
 
 This project provides a wonky solution to a niche problem. The website [ViewSync](https://viewsync.net) allows users to watch multiple YouTube videos at the same time while setting a time offset for each video. This is great for watching different POVs of an event. 
 
-We present a solution that (kind of) eliminates the need for manual alignment. We use audio data to obtain a set of time offsets of given YouTube URLs and generate a link to open [ViewSync](https://viewsync.net) player directly.
+We present a solution that eliminates the need for manual alignment by using the audio data to obtain a set of time offsets of YouTube URLs and generating a link to open the ViewSync player.
+
+### How to use
+This project is set up as Flask app, and can be run locally by installing the packages in `requirements.txt` in a virtual environment, then running `flask run --debug` from the main directory.
 
 ### Algorithm
 Our algorithm compares all unique pairs of signals extracted from the audio file to maximize their correlation. First, the two signals are appended by silence to allow for all possible lag configurations. To these padded signals, we then apply the Fourier transform which allows us to access the frequency domain of the signals which naturally encodes information of the signals. 
